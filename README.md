@@ -37,6 +37,7 @@ int main(int argc, char* argv[]) {
 
     SDL_RWclose(file);
 
+    assetsys_destroy(sys);
 	SDL_Quit();
 
     return 0;

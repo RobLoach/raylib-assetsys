@@ -39,8 +39,10 @@ int main(int argc, char* argv[]) {
     // SDL_RWclose()
     SDL_assert(SDL_RWclose(file) == 0);
 
+    assetsys_destroy(sys);
+
     SDL_Log("SDL_assert_test: Tests passed\n");
 	SDL_Quit();
-    
+
     return 0;
 }
