@@ -1,6 +1,6 @@
 # raylib-assetsys
 
-Use the file system abstraction library, [assetsys.h](https://github.com/mattiasgustavsson/libs/blob/main/assetsys.h), with [raylib](https://github.com/raysan5/raylib).
+Use the file system abstraction library, [assetsys.h](https://github.com/mattiasgustavsson/libs/blob/main/assetsys.h), with [raylib](https://github.com/raysan5/raylib), to allow loading assets from .zip files.
 
 ## Example
 
