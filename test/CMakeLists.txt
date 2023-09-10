@@ -1,17 +1,20 @@
-find_package(SDL2 REQUIRED)
-set(SDL2_LIBRARIES SDL2::SDL2 SDL2::SDL2main)
+# Add the cmake module path
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/../cmake)
 
-# Resources
-file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/resources/ DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/resources/)
+find_package(Raylib)
 
-# SDL_assetsys_test
-add_executable(SDL_assetsys_test SDL_assetsys_test.c)
-target_compile_options(SDL_assetsys_test PRIVATE -Wall -Wextra -Wconversion -Wsign-conversion)
-target_link_libraries(SDL_assetsys_test PUBLIC
-    ${SDL2_LIBRARIES}
-    SDL_assetsys
+# raylib-physfs-test
+add_executable(raylib-assetsys-test raylib-assetsys-test.c)
+target_link_libraries(raylib-assetsys-test PUBLIC
+    raylib
+    raylib-assetsys
 )
 
+# Copy the resources
+file(GLOB resources resources/*)
+set(test_resources)
+list(APPEND test_resources ${resources})
+file(COPY ${test_resources} DESTINATION "resources/")
+
 # Set up the test
-list(APPEND CMAKE_CTEST_ARGUMENTS "--output-on-failure")
-add_test(NAME SDL_assetsys_test COMMAND SDL_assetsys_test)
+add_test(NAME raylib-assetsys-test COMMAND raylib-assetsys-test)

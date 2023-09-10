@@ -1,44 +1,37 @@
-# SDL_assetsys
+# raylib-assetsys
 
-Use the file system abstraction library, [assetsys.h](https://github.com/mattiasgustavsson/libs/blob/main/assetsys.h), with SDL.
+Use the file system abstraction library, [assetsys.h](https://github.com/mattiasgustavsson/libs/blob/main/assetsys.h), with [raylib](https://github.com/raysan5/raylib).
 
 ## API
 
 ``` c
-SDL_RWops* SDL_RWFromAssetsys(assetsys_t* sys, const char* path);
-SDL_Surface* SDL_LoadBMP_Assetsys(asset_t* sys, const char* path);
-SDL_Surface* IMG_Load_Assetsys(asset_t* sys, const char* path);
+bool InitAssetsys(char const* path, char const* mount_as);
+bool MountAssetsys(const char* path, const char* mount_as);
+bool IsAssetsysReady();
+void CloseAssetsys();
+unsigned char *LoadFileDataFromAssetsys(const char *fileName, int *dataSize);
+char *LoadFileTextFromAssetsys(const char *fileName);
+Image LoadImageFromAssetsys(const char* fileName);
 ```
 
 ## Example
 
 ``` c
-#include <stdio.h>
-#include <SDL2/SDL.h>
+#include <raylib.h>
 
-#define SDL_ASSETSYS_IMPLEMENTATION
-#include "SDL_assetsys.h"
+#define RAYLIB_ASSETSYS_IMPLEMENTATION
+#include "raylib-assetsys.h"
 
 int main(int argc, char* argv[]) {
-	SDL_Init(0);
+    // Initialize assetsys, and mount resources.zip as /data
+    InitAssetsys("resources.zip", "/data");
 
-    assetsys_t* sys = assetsys_create(0);
-    assetsys_mount(sys, "resources", "/res");
+    // Load cat.png from the zip
+    Image cat = LoadImageFromAssetsys("/data/cat.png");
+    UnloadImage(cat);
 
-    SDL_RWops* file = SDL_RWFromAssetsys(sys, "/res/test.txt");
-
-    int size = SDL_RWsize(file);
-
-    char output[256];
-    SDL_RWread(file, output, 1, size);
-
-    printf("Output: %s\n", output);
-    // => Hello, World!
-
-    SDL_RWclose(file);
-
-    assetsys_destroy(sys);
-	SDL_Quit();
+    // Close the assetsys
+    CloseAssetsys();
 
     return 0;
 }
@@ -46,4 +39,4 @@ int main(int argc, char* argv[]) {
 
 ## License
 
-*SDL_assetsys* is licensed under an unmodified zlib/libpng license, which is an OSI-certified, BSD-like license that allows static linking with closed source software. Check [LICENSE](LICENSE) for further details.
+*raylib-assetsys* is licensed under an unmodified zlib/libpng license, which is an OSI-certified, BSD-like license that allows static linking with closed source software. Check [LICENSE](LICENSE) for further details.
