@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.11)
 project(SDL_assetsys
     DESCRIPTION "SDL_assetsys: Use the file system abstraction system, assetsys, with SDL."
     HOMEPAGE_URL "https://github.com/RobLoach/SDL_assetsys"
-    VERSION 0.0.1
+    VERSION 0.1.0
     LANGUAGES C
 )
 

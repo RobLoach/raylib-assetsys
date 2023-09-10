@@ -44,6 +44,9 @@ extern "C" {
 #endif
 
 #ifndef SDL_ASSETSYS_ASSETSYS_H
+/**
+ * The path to where assetsys.h exists.
+ */
 #define SDL_ASSETSYS_ASSETSYS_H "libs/assetsys.h"
 #endif
 #include SDL_ASSETSYS_ASSETSYS_H
@@ -81,6 +84,32 @@ SDL_ASSETSYS_API SDL_RWops* SDL_RWFromAssetsys(assetsys_t* sys, const char* path
 #define IMG_Load_Assetsys(sys, path) (IMG_Load_RW(SDL_RWFromAssetsys((sys), (path)), 1))
 
 /**
+ * @see SDL_LoadWAV_RW()
+ */
+#define SDL_LoadWAV_Assetsys(sys, path, spec, audio_buf, audio_len) (SDL_LoadWAV_RW(SDL_RWFromAssetsys((sys), (path)), 1, (spec), (audio_buf), (audio_len)))
+#define Mix_LoadMUS_Assetsys(sys, path) (Mix_LoadMUS_RW(SDL_RWFromAssetsys((sys), (path)), 1))
+#define Mix_LoadWAV_Assetsys(sys, path) (Mix_LoadWAV_RW(SDL_RWFromAssetsys((sys), (path)), 1))
+
+/**
+ * Load all the file data from the given path in the assetsys.
+ *
+ * @param sys The assetsys_t* to load from.
+ * @param path The path of the file to load.
+ * @param datasize Where to save the size of the file, needs to be a size_t*.
+ *
+ * @return A void* of the file data. Make sure to SDL_free() it afterwards.
+ * @see SDL_LoadFile_RW()
+ */
+#define SDL_LoadFile_Assetsys(sys, path, datasize) (SDL_LoadFile_RW(SDL_RWFromAssetsys((sys), (path)), (datasize), 1))
+
+/**
+ * SDL_stbimage support for loading images with stb_image.h with assetsys.
+ *
+ * https://github.com/DanielGibson/Snippets/blob/master/SDL_stbimage.h
+ */
+#define STBIMG_Load_Assetsys(sys, path) (STBIMG_Load_RW(SDL_RWFromAssetsys((sys), (path)), 1))
+
+/**
  * Function used to allocate memory within assetsys which routes to SDL's malloc function.
  *
  * @param ctx The memory context for assetsys.
@@ -113,6 +142,9 @@ SDL_ASSETSYS_API void* SDL_assetsys_malloc(void* ctx, ASSETSYS_U64 size);
 #define STRPOOL_FREE(ctx, ptr) (ASSETSYS_FREE(ctx, ptr))
 #define STRPOOL_IMPLEMENTATION
 #ifndef SDL_ASSETSYS_STRPOOL_H
+/**
+ * The location where strpool.h exists.
+ */
 #define SDL_ASSETSYS_STRPOOL_H "libs/strpool.h"
 #endif  // SDL_ASSETSYS_STRPOOL_H
 #include SDL_ASSETSYS_STRPOOL_H
