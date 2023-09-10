@@ -84,6 +84,18 @@ SDL_ASSETSYS_API SDL_RWops* SDL_RWFromAssetsys(assetsys_t* sys, const char* path
 #define IMG_Load_Assetsys(sys, path) (IMG_Load_RW(SDL_RWFromAssetsys((sys), (path)), 1))
 
 /**
+ * Load an SDL_Texture directly from the assetsys.
+ *
+ * @param renderer The SDL_Renderer to use when creating the texture.
+ * @param sys The assetsys_t* to load from.
+ * @param path A const char* representing the path of the file to load.
+ *
+ * @return A pointer to the loaded SDL_Texture, or NULL on failure.
+ * @see IMG_LoadTexture_RW()
+ */
+#define IMG_LoadTexture_Assetsys(renderer, sys, path) (IMG_LoadTexture_RW((renderer), SDL_RWFromAssetsys((sys), (path)), 1))
+
+/**
  * @see SDL_LoadWAV_RW()
  */
 #define SDL_LoadWAV_Assetsys(sys, path, spec, audio_buf, audio_len) (SDL_LoadWAV_RW(SDL_RWFromAssetsys((sys), (path)), 1, (spec), (audio_buf), (audio_len)))
