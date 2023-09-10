@@ -2,18 +2,6 @@
 
 Use the file system abstraction library, [assetsys.h](https://github.com/mattiasgustavsson/libs/blob/main/assetsys.h), with [raylib](https://github.com/raysan5/raylib).
 
-## API
-
-``` c
-bool InitAssetsys(char const* path, char const* mount_as);
-bool MountAssetsys(const char* path, const char* mount_as);
-bool IsAssetsysReady();
-void CloseAssetsys();
-unsigned char *LoadFileDataFromAssetsys(const char *fileName, int *dataSize);
-char *LoadFileTextFromAssetsys(const char *fileName);
-Image LoadImageFromAssetsys(const char* fileName);
-```
-
 ## Example
 
 ``` c
@@ -35,6 +23,18 @@ int main(int argc, char* argv[]) {
 
     return 0;
 }
+```
+
+## API
+
+``` c
+bool InitAssetsys(char const* path, char const* mount_as);
+bool MountAssetsys(const char* path, const char* mount_as);
+bool IsAssetsysReady();
+void CloseAssetsys();
+unsigned char *LoadFileDataFromAssetsys(const char *fileName, int *dataSize);
+char *LoadFileTextFromAssetsys(const char *fileName);
+Image LoadImageFromAssetsys(const char* fileName);
 ```
 
 ## License
